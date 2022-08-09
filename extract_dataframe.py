@@ -60,11 +60,11 @@ class TweetDfExtractor:
 
     def find_source(self)->list:
         source = self.df['source'].to_list()
-
         return source
 
     def find_screen_name(self)->list:
         screen_name = self.df['user.screen_name'].to_list()
+        return screen_name
 
     def find_followers_count(self)->list:
         followers_count = self.df['user.followers_count'].to_list()
@@ -76,7 +76,7 @@ class TweetDfExtractor:
 
     def is_sensitive(self)->list:
         try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
+            is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
         except KeyError:
             is_sensitive = None
 
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     columns = ['created_at', 'source', 'original_text','clean_text', 'sentiment','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
     'original_author', 'screen_count', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
     _, tweet_list = read_json("data/global_twitter_data.json")
+    # print("I have Started")
     tweet = TweetDfExtractor(tweet_list)
     tweet_df = tweet.get_tweet_df() 
-    print("I have Started")
     # use all defined functions to generate a dataframe with the specified columns above
