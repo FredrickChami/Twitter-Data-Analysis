@@ -71,15 +71,11 @@ class TweetDfExtractor:
         return followers_count
 
     def find_friends_count(self)->list:
-        friends_count = self.df['user.friends_count']
+        friends_count = self.df['user.friends_count'].to_list()
         return friends_count
 
     def is_sensitive(self)->list:
-        try:
-            is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
-        except KeyError:
-            is_sensitive = None
-
+        is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
         return is_sensitive
 
     def find_favourite_count(self)->list:
@@ -100,7 +96,7 @@ class TweetDfExtractor:
 
     def find_location(self)->list:
         try:
-            location = self.tweets_list['user']['location']
+            location = self.df['user.location'].to_list()
         except TypeError:
             location = ''
         
@@ -110,7 +106,7 @@ class TweetDfExtractor:
         lang=self.df['lang'].to_list()
         return lang
         
-    def get_tweet_df(self, save=False)->pd.DataFrame:
+    def get_tweet_df(self, save=True)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
         
         columns = ['created_at', 'source', 'original_text','polarity','subjectivity', 'lang', 'favorite_count', 'retweet_count', 
@@ -130,6 +126,8 @@ class TweetDfExtractor:
         hashtags = self.find_hashtags()
         mentions = self.find_mentions()
         location = self.find_location()
+        print(type(follower_count), type(friends_count), type(sensitivity))
+
         data = zip(created_at, source, text, polarity, subjectivity, lang, fav_count, retweet_count, screen_name, follower_count, friends_count, sensitivity, hashtags, mentions, location)
         df = pd.DataFrame(data=data, columns=columns)
 
