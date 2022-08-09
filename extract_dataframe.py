@@ -40,9 +40,10 @@ class TweetDfExtractor:
         count = 0
         for element in self.tweets_list:
             count = count +element['user']['friends_count']
-        
+        return statuses_count.append(count)
     def find_full_text(self)->list:
-        text = 
+        text = []
+
        
     
     def find_sentiments(self, text)->list:
@@ -136,5 +137,5 @@ if __name__ == "__main__":
     _, tweet_list = read_json("data/global_twitter_data.json")
     tweet = TweetDfExtractor(tweet_list)
     tweet_df = tweet.get_tweet_df() 
-
+    print("I have Started")
     # use all defined functions to generate a dataframe with the specified columns above
