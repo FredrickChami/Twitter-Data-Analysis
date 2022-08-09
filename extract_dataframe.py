@@ -33,6 +33,8 @@ class TweetDfExtractor:
     def __init__(self, tweets_list):
         
         self.tweets_list = tweets_list
+        self.df = pd.json_normalize(tweets_list)
+        self.df.loc
 
     # an example function
     def find_statuses_count(self)->list:
@@ -88,12 +90,14 @@ class TweetDfExtractor:
     def find_retweet_count(self)->list:
         retweet_count = self.df['retweeted_status.retweet_count'].to_list()
         return retweet_count
-        
+
     def find_hashtags(self)->list:
-        hashtags =
+        hashtags = self.df['entities.hashtags'].to_list()
+        return hashtags
 
     def find_mentions(self)->list:
-        mentions = 
+        mentions = self.df['entities.user_mentions'].to_list()
+        return mentions
 
 
     def find_location(self)->list:
