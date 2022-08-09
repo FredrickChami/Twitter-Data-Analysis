@@ -42,9 +42,7 @@ class TweetDfExtractor:
         return statuses_count
 
     def find_full_text(self)->list:
-        text = self.df['extended_tweet.full_text']\
-            .fillna(self.df['retweeted_status.extended_tweet.full_text']).fillna(self.df['quoted_status.extended_tweet.full_text']).fillna(self.df['retweeted_status.quoted_status.extended_tweet.full_text'])\
-            .fillna(self.df['retweeted_status.text']).fillna(self.df['text']).to_list()
+        text = self.df['full_text'].fillna(self.df['retweeted_status.full_text']).to_list()
         return text    
 
        
