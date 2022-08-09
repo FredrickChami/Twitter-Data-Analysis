@@ -52,7 +52,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         # tweet_df = self.df.get_tweet_df()
 
     def test_find_statuses_count(self):
-        self.assertEqual(self.df.find_statuses_count(), [ 8097,8097,5831,110486,1627,1627]
+        self.assertEqual(self.df.find_statuses_count(), [8097, 5831, 1627, 1627, 18958]
         )
 
     def test_find_full_text(self):
@@ -68,8 +68,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(
             self.df.find_sentiments(self.df.find_full_text()),
             (
-               [0.190625,0.1,0,0.35,0.55625
-]
+               [0.190625,0.1,0,0.35,0.55625]
             ),
         )
 
