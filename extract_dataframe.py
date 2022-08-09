@@ -64,13 +64,15 @@ class TweetDfExtractor:
         return source
 
     def find_screen_name(self)->list:
-        screen_name = 
+        screen_name = self.df['user.screen_name'].to_list()
 
     def find_followers_count(self)->list:
-        followers_count = 
+        followers_count = self.df['user.followers_count'].to_list()
+        return followers_count
 
     def find_friends_count(self)->list:
-        friends_count = 
+        friends_count = self.df['user.friends_count']
+        return friends_count
 
     def is_sensitive(self)->list:
         try:
@@ -81,11 +83,12 @@ class TweetDfExtractor:
         return is_sensitive
 
     def find_favourite_count(self)->list:
-        pass
+        return self.df['retweeted_status.favorite_count'].to_list()
     
     def find_retweet_count(self)->list:
-        retweet_count = 
-
+        retweet_count = self.df['retweeted_status.retweet_count'].to_list()
+        return retweet_count
+        
     def find_hashtags(self)->list:
         hashtags =
 
