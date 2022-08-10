@@ -1,2 +1,3 @@
 __pycache__/
-data/
+data/global_twitter_data.json
+data/africa_twitter_data.json
