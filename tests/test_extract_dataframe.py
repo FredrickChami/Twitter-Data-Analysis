@@ -68,7 +68,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(
             self.df.find_sentiments(self.df.find_full_text()),
             (
-               [0.190625,0.1,0,0.35,0.55625]
+               [-0.125, -0.1, 0.0, 0.1,-6.938893903907228e-18], [0.190625, 0.1, 0.0, 0.35,0.55625]
             ),
         )
 
@@ -79,8 +79,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_screen_name(), name)
 
     def test_find_followers_count(self):
-        f_count = [20497,65,85,85,910
-]
+        f_count = [20497,65,85,85,910]
         self.assertEqual(self.df.find_followers_count(), f_count)
 
     def test_find_friends_count(self):
