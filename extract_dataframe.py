@@ -75,8 +75,14 @@ class TweetDfExtractor:
         return friends_count
 
     def is_sensitive(self)->list:
-        is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
+        try:
+            is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
+        except KeyError:
+            is_sensitive = [None, None, None, None, None]
+
         return is_sensitive
+        # is_sensitive = self.df['possibly_sensitive'].apply(lambda x:x if x == True or x==False else None).to_list()
+        # return is_sensitive
 
     def find_favourite_count(self)->list:
         return self.df['retweeted_status.favorite_count'].to_list()
